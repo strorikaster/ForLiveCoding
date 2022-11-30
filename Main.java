@@ -10,7 +10,8 @@ public class Main {
 
         int[] nums = {3, 6, 7, 8, 10};
         int[] digits = {9};
-        //for generics test
+
+        //Begin Test generics and PECS
         List<? extends A> list1 = new ArrayList<>();
         List<? super B> list2 = new ArrayList<>();
 
@@ -25,7 +26,6 @@ public class Main {
         //list1.add(d);<? extends A> producer ничего нельзя положить кроме null
         list2.add(b);
         list2.add(c);
-
         //end generic test
 
 
@@ -35,10 +35,15 @@ public class Main {
         //System.out.println(plusOne(digits).toString());
         // System.out.println(getDuplicatedWordsInString("Java i like this programming language java"));
         String str = "Иванов Иван Иванович";
-        System.out.println(reverseString(str));
+        //System.out.println(reverseString(str));
         //System.out.println(exchangeSymbols(str,  'а', 'т'));
         //System.out.println(stringToInt("-23"));
         //outputNumbers();
+        //System.out.println(stringToDouble("23"));
+        int[] nums1 = {1,2,3,5,7};
+        int[] nums2 = {2,3,4,6,8};
+        printNonRepeatElementsInFirstArray(nums1, nums2);
+
     }
 
     public static int removeElement(int[] nums, int val) {
@@ -202,6 +207,39 @@ public class Main {
     public static class B extends A{}
     public static class C extends B{}
 
+    public static Double stringToDouble(String str) {
+        Double result = 0.0;
+        int isNegative = 1;
+        int pow = 0;
+        if (str.charAt(0) == '-') {
+            isNegative = -1;
+            str = str.substring(1);
+        }
+        for (int i = 0; i < str.length(); i++) {
+
+                if(str.charAt(i) == ',') {
+                    ++i;
+                    pow = str.length() - i;
+                }
+            result = result * 10 + ((str.charAt(i))) - '0';
+            }
+        result = isNegative*result/Math.pow(10, pow);
+        return result;
+    }
+
+    public static void printNonRepeatElementsInFirstArray(int[] nums1, int[] nums2) {
+       int k = 0;
+       int l = 0;
+
+       while (k < nums1.length) {
+           if(nums1[k] != nums2[l]) {
+               System.out.println(nums1[k]);
+           } else {
+               l++;
+           }
+           k++;
+       }
+    }
 }
 
 
